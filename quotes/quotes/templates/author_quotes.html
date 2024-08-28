@@ -1,0 +1,11 @@
+<h2>Quotes of author: {{ author.fullname }}</h2>
+
+<ul>
+    {% for quote in quotes %}
+        <li>{{ quote.quote }}</li>
+    {% empty %}
+        <li>This author has no quotes.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'author_list' %}">Return to the author list</a>

@@ -1,0 +1,6 @@
+<h2>Author List</h2>
+<ul>
+    {% for author in authors %}
+        <li><a href="{% url 'author_detail' author.id %}">{{ author.fullname }}</a></li>
+    {% endfor %}
+</ul>

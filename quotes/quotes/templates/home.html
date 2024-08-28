@@ -1,0 +1,14 @@
+<h2>Main page</h2>
+<p>Welcome to django project!</p>
+<p><a href="{% url 'author_list' %}">View Author List</a></p>
+{% if user.is_authenticated %}
+    <p>Your login as {{ user.username }}.</p>
+    <a href="{% url 'create_author' %}">Create New Author</a>
+    <a href="{% url 'create_quote' %}">Create New Quote</a>
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <p>You did not log in. <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Registration</a></p>
+{% endif %}

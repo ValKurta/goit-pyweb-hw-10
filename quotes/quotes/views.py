@@ -11,8 +11,8 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Автоматический вход после регистрации
-            return redirect('home')  # Перенаправление на главную страницу
+            login(request, user)
+            return redirect('home')
     else:
         form = UserRegisterForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -28,7 +28,7 @@ def create_author(request):
         form = AuthorForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Перенаправление на главную страницу после создания автора
+            return redirect('home')
     else:
         form = AuthorForm()
     return render(request, 'create_author.html', {'form': form})
@@ -40,7 +40,7 @@ def create_quote(request):
         form = QuoteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Перенаправление на главную страницу после создания цитаты
+            return redirect('home')
     else:
         form = QuoteForm()
     return render(request, 'create_quote.html', {'form': form})
@@ -57,7 +57,11 @@ def author_list(request):
 
 
 def author_quotes(request, author_id):
-    author = get_object_or_404(Author, pk=author_id)  # Получаем автора по его ID
-    quotes = Quote.objects.filter(author=author)  # Фильтруем цитаты по автору
+    author = get_object_or_404(Author, pk=author_id)
+    quotes = Quote.objects.filter(author=author)
     return render(request, 'author_quotes.html', {'author': author, 'quotes': quotes})
 
+
+def quote_list(request):
+    quotes = Quote.objects.all()
+    return render(request, 'quote_list.html', {'quotes': quotes})

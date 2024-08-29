@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Quotes List</h2>
+    <ul>
+        {% for quote in quotes %}
+            <li>
+                <strong>{{ quote.author.fullname }}</strong> - "{{ quote.quote }}"
+            </li>
+        {% empty %}
+            <li>No Quotes.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Return to the main page</a>
+</body>
+</html>

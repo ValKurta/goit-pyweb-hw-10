@@ -1,17 +1,41 @@
-version: "1.0"
+version: "2.0"
 
 volumes:
   db-app:
+  es-data:
 
 services:
   db-app:
     image: postgres
     environment:
-      POSTGRES_DB: djangoquotesapp
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
       - db-app:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    restart: unless-stopped
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    restart: unless-stopped
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.5
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
     restart: unless-stopped

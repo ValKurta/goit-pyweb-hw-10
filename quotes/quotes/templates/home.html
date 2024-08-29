@@ -1,6 +1,7 @@
 <h2>Main page</h2>
 <p>Welcome to django project!</p>
 <p><a href="{% url 'author_list' %}">View Author List</a></p>
+<p><a href="{% url 'quote_list' %}">Quotes List</a></p>
 {% if user.is_authenticated %}
     <p>Your login as {{ user.username }}.</p>
     <a href="{% url 'create_author' %}">Create New Author</a>

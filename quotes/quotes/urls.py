@@ -29,7 +29,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('create-author/', views.create_author, name='create_author'),
     path('create-quote/', views.create_quote, name='create_quote'),
-    path('authors/', views.author_list, name='author_list'),  # Страница списка авторов
-    path('author/<int:author_id>/', views.author_detail, name='author_detail'),  # Страница с деталями об авторе
-    path('author/<int:author_id>/quotes/', views.author_quotes, name='author_quotes'),  # Страница цитат автора
+    path('authors/', views.author_list, name='author_list'),
+    path('author/<int:author_id>/', views.author_detail, name='author_detail'),
+    path('author/<int:author_id>/quotes/', views.author_quotes, name='author_quotes'),
+    path('quotes/', views.quote_list, name='quote_list'),
 ]
